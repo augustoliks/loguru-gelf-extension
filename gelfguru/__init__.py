@@ -47,11 +47,11 @@ def _gelf_sink(payload):
         " ".join(record.get("message").split()[:10])
     )
 
-    gelf_format = {
+    gelf_payload = {
         'version': '1.1',
         "short_message": _short,
         "full_message": text,
-        "timestamp": str(record.get("time").get('timestamp')),
+        "timestamp": record.get("time").get('timestamp'),
         "level": record.get("level").get("no"),
         "line": record.get("line"),
         "_file": record.get("file").get("path"),
@@ -67,12 +67,12 @@ def _gelf_sink(payload):
         record["extra"].pop("id")
 
     if record.get("exception"):
-        gelf_format.update({"_exception": record.get("exception")})
+        gelf_payload.update({"_exception": record.get("exception")})
 
     for extra_field, extra_value in record.get("extra").items():
-        gelf_format.update({'_{}'.format(extra_field): extra_value})        
+        gelf_payload.update({'_{}'.format(extra_field): extra_value})        
 
-    print(json.dumps(gelf_format))
+    print(json.dumps(gelf_payload))
 
 
 def configure_gelf_output():
@@ -88,7 +88,7 @@ def configure_gelf_output():
     logger.__class__.informational = partialmethod(logger.__class__.log, "informational")
     logger.__class__.info = partialmethod(logger.__class__.log, "info")
     logger.__class__.debug = partialmethod(logger.__class__.log, "debug")
-    logger.level("emergency", no=0)
+    # logger.level("emergency", no=0)
     logger.level("emerg", no=0)
     logger.level("alert", no=1)
     logger.level("critical", no=2)

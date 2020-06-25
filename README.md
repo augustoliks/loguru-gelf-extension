@@ -59,19 +59,39 @@ gelfguru implements methods with Severity or Keyword, for example:
 
 >>> configure_gelf_output() 
 
->>> logger.trace('loguru trace calls equals gelfguru debug calls') 
+>>> logger.bind(field_extra='any_field').trace('Extra fields add with .bind() function')
 
-{"version": "1.1", "short_message": "loguru trace calls equals gelfguru debug calls", "full_message": "TRACE\n", "timestamp": "1593048146.440082", "level": 5, "line": 6, "_file": "<ipython-input-1-29f7b6d3520d>", "_context": {"module": "__main__:<module>:6", "process": "MainProcess", "thread": "MainThread"}}
+{
+  "version": "1.1",
+  "short_message": "Extra fields add with .bind() function",
+  "full_message": "TRACE\n",
+  "timestamp": 1593051186.92822,
+  "level": 5,
+  "line": 6,
+  "_file": "/home/augustoliks/github/loguru-gelf-extension/test.py",
+  "_context": {
+    "module": "__main__:<module>:6",
+    "process": "MainProcess",
+    "thread": "MainThread"
+  },
+  "_field_extra": "any_field"
+}
 
->>> logger.info('Change numeric level value, in the case, is used RFC-5424 numeric level value') 
+>>> logger.bind(id='6sdaf4das6f34453').info('id bind is trasform to _id_record')
 
-{"version": "1.1", "short_message": "Change numeric level value, in the case, is used RFC-5424", "full_message": "info\n", "timestamp": "1593048146.440787", "level": 6, "line": 7, "_file": "<ipython-input-1-29f7b6d3520d>", "_context": {"module": "__main__:<module>:7", "process": "MainProcess", "thread": "MainThread"}}
-
->>> logger.emergency('Implemented RFC-5424 Syslog Severity Logs') 
-
-{"version": "1.1", "short_message": "Implemented RFC-5424 Syslog Severity Logs", "full_message": "emergency\n", "timestamp": "1593048146.441399", "level": 0, "line": 8, "_file": "<ipython-input-1-29f7b6d3520d>", "_context": {"module": "__main__:<module>:8", "process": "MainProcess", "thread": "MainThread"}}
-
->>> logger.emerg('Implemented RFC-5424 Keyword calls')                                   
-
-{"version": "1.1", "short_message": "Implemented RFC-5424 Keyword calls", "full_message": "emerg\n", "timestamp": "1593048146.441991", "level": 0, "line": 9, "_file": "<ipython-input-1-29f7b6d3520d>", "_context": {"module": "__main__:<module>:9", "process": "MainProcess", "thread": "MainThread"}}
+{
+  "version": "1.1",
+  "short_message": "id bind is trasform to _id_record",
+  "full_message": "info\n",
+  "timestamp": 1593051186.929191,
+  "level": 6,
+  "line": 7,
+  "_file": "/home/augustoliks/github/loguru-gelf-extension/test.py",
+  "_context": {
+    "module": "__main__:<module>:7",
+    "process": "MainProcess",
+    "thread": "MainThread"
+  },
+  "_id_record": "6sdaf4das6f34453"
+}
 ```

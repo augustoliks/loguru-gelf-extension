@@ -5,9 +5,10 @@ A Loguru extension for handling log messages and adapt to GELF payload pattern, 
 This library was created especially for applications running in Docker environment with GELF Logging Driver.
 
 Features:
-    - Dont modify call methods Loguru, like `logger.trace`, `logger.info`, `logger.info` etc...;
-    - Create new methods for `logger` instace, with all [RFC-5424](https://en.wikipedia.org/wiki/Syslog) Severity level;
-    - Associates [RFC-5424](https://en.wikipedia.org/wiki/Syslog) Severity Levels Numerical Codes in GELF field.
+
+- Dont modify call methods Loguru, like `logger.trace`, `logger.info`, `logger.info` etc...;
+- Create new methods for `logger` instace, with all [RFC-5424](https://en.wikipedia.org/wiki/Syslog) Severity level;
+- Associates [RFC-5424](https://en.wikipedia.org/wiki/Syslog) Severity Levels Numerical Codes in GELF field.
 
 
 # Installation

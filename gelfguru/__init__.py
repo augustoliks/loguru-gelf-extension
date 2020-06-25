@@ -30,8 +30,8 @@ class _FilterSyslogLevels:
                         self.level = level_no
             else:
                 self.level = self.LEVELS.get(level.lower(), 7)
-        except:
-            print('Error log level configuration, will be set INFO level for default')
+        except Exception as e:
+            print('Error log level configuration, will be set INFO level for default | {}'.format(e))
 
     def __call__(self, record):
         return record["level"].no <= self.level
@@ -70,7 +70,9 @@ def _gelf_sink(payload):
         gelf_payload.update({"_exception": record.get("exception")})
 
     for extra_field, extra_value in record.get("extra").items():
-        gelf_payload.update({'_{}'.format(extra_field): extra_value})        
+        gelf_payload.update({
+            '_{}'.format(extra_field): extra_value
+        })
 
     print(json.dumps(gelf_payload))
 

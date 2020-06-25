@@ -1,20 +1,18 @@
 [![PyPI version](https://badge.fury.io/py/gelfguru.svg)](https://badge.fury.io/py/gelfguru)
 
-[![Coverage Status](https://coveralls.io/repos/github/augustoliks/loguru-gelf-extension/badge.svg?branch=master)](https://coveralls.io/github/augustoliks/loguru-gelf-extension?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecc1f25454164ff78e432f5a126563cb)](https://www.codacy.com/manual/augustoliks/loguru-gelf-extension?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=augustoliks/loguru-gelf-extension&amp;utm_campaign=Badge_Grade)
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # loguru-gelf-extension
 
 A Loguru extension for handling log messages and adapt to GELF payload pattern, without modifying  built-in Loguru methods call.
-
 This library was created especially for applications running in Docker environment with GELF Logging Driver.
 
 Features:
-
 - Dont modify call methods Loguru, like `logger.trace`, `logger.info`, `logger.info` etc...;
 - Create new methods for `logger` instace, with all [RFC-5424](https://en.wikipedia.org/wiki/Syslog) Severity level;
 - Associates [RFC-5424](https://en.wikipedia.org/wiki/Syslog) Severity Levels Numerical Codes in GELF field.
-
 
 # Installation
 
@@ -22,10 +20,9 @@ Features:
 pip3.7 install gelfguru
 ```
 
-
 # How to Use 
 
-If you configure loguru instance with `gelfguru`, you only need to execute:
+If you configure Loguru instance with `gelfguru`, you only need to execute:
 
 ```python
 from loguru import logger
@@ -39,11 +36,9 @@ logger.emergency('Implemented RFC-5424 Syslog Severity Logs')
 logger.emerg('Implemented RFC-5424 Keyword calls')
 ```
 
-
 ## Log Levels
 
 GELF log level is equal to the standard syslog levels.
-
 
 Value |	Severity	   | Keyword  | Description
 :---: |:---:           |:---:     | :---:
@@ -56,8 +51,7 @@ Value |	Severity	   | Keyword  | Description
 6     | Informational  |  info    | Informational messages
 7     | Debug          |  debug   | Debug-level messages. Messages that contain information normally of use only when debugging a program.
 
-
-gelfguru implements methods with Severity or Keyword, for example:
+Gelfguru implements methods with Severity or Keyword, for example:
 
 ```python
 >>> import logger

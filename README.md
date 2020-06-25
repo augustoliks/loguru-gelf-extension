@@ -1,3 +1,8 @@
+[![PyPI version](https://badge.fury.io/py/gelfguru.svg)](https://badge.fury.io/py/gelfguru)
+
+[![Coverage Status](https://coveralls.io/repos/github/augustoliks/loguru-gelf-extension/badge.svg?branch=master)](https://coveralls.io/github/augustoliks/loguru-gelf-extension?branch=master)
+
+
 # loguru-gelf-extension
 
 A Loguru extension for handling log messages and adapt to GELF payload pattern, without modifying  built-in Loguru methods call.

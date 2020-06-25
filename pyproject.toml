@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gelfguru"
-version = "0.1.0"
+version = "0.1.1"
 description = "Loguru extension for log in GELF payload format."
 authors = ["Carlos Neto <carlos.santos110@fatec.sp.gov.br>"]
 license = "Apache-2.0"

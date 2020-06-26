@@ -1,3 +1,9 @@
+"""
+A Loguru extension for handling log messages and adapt to GELF
+payload pattern, without modifying  built-in Loguru methods call.
+This library was created especially for applications running in
+Docker environment with GELF Logging Driver.
+"""
 __version__ = '0.1.0'
 
 

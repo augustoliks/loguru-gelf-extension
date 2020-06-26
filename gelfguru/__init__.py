@@ -4,7 +4,7 @@ payload pattern, without modifying  built-in Loguru methods call.
 This library was created especially for applications running in
 Docker environment with GELF Logging Driver.
 """
-__version__ = '0.1.0'
+__version__ = '0.1.2'
 
 
 from loguru import logger

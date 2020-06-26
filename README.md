@@ -52,57 +52,73 @@ GELF log level is equal to the standard syslog levels.
 Example using IPython:
 
 ```python
-In [1]: from loguru import logger                                                                             
+from loguru import logger                                                                             
+from gelfguru import configure_gelf_output                                                            
 
-In [2]: from gelfguru import configure_gelf_output                                                            
+configure_gelf_output()                                                                               
 
-In [3]: configure_gelf_output()                                                                               
+logger.trace('loguru trace calls equals gelfguru debug calls')                                        
+# {
+#   "version": "1.1",
+#   "short_message": "trace\n",
+#   "full_message": "trace\n",
+#   "timestamp": 1593137655.309429,
+#   "level": 7,
+#   "line": 1,
+#   "_file": "<ipython-input-4-698cb139534b>",
+#   "_context": {
+#     "module": "__main__:<module>:1",
+#     "process": "MainProcess",
+#     "thread": "MainThread"
+#   }
+# }
 
-In [4]: logger.trace('loguru trace calls equals gelfguru debug calls')                                        
-{
-  "version": "1.1",
-  "short_message": "trace\n",
-  "full_message": "trace\n",
-  "timestamp": 1593137655.309429,
-  "level": 7,
-  "line": 1,
-  "_file": "<ipython-input-4-698cb139534b>",
-  "_context": {
-    "module": "__main__:<module>:1",
-    "process": "MainProcess",
-    "thread": "MainThread"
-  }
-}
+logger.info('Change numeric level value, in the case, is used RFC-5424 numeric level value')          
+# {
+#   "version": "1.1",
+#   "short_message": "Change numeric level value, in the case, is used RFC-5424",
+#   "full_message": "Change numeric level value, in the case, is used RFC-5424 numeric level value",
+#   "timestamp": 1593137655.42884,
+#   "level": 6,
+#   "line": 1,
+#   "_file": "<ipython-input-5-d527b5b194dc>",
+#   "_context": {
+#     "module": "__main__:<module>:1",
+#     "process": "MainProcess",
+#     "thread": "MainThread"
+#   }
+# }
 
-In [5]: logger.info('Change numeric level value, in the case, is used RFC-5424 numeric level value')          
-{
-  "version": "1.1",
-  "short_message": "Change numeric level value, in the case, is used RFC-5424",
-  "full_message": "Change numeric level value, in the case, is used RFC-5424 numeric level value",
-  "timestamp": 1593137655.42884,
-  "level": 6,
-  "line": 1,
-  "_file": "<ipython-input-5-d527b5b194dc>",
-  "_context": {
-    "module": "__main__:<module>:1",
-    "process": "MainProcess",
-    "thread": "MainThread"
-  }
-}
+logger.emergency('Implemented RFC-5424 Syslog Severity Logs')                                         
+# {
+#   "version": "1.1",
+#   "short_message": "Implemented RFC-5424 Syslog Severity Logs",
+#   "full_message": "Implemented RFC-5424 Syslog Severity Logs",
+#   "timestamp": 1593137657.236526,
+#   "level": 0,
+#   "line": 1,
+#   "_file": "<ipython-input-6-5c45ca4c1de6>",
+#   "_context": {
+#     "module": "__main__:<module>:1",
+#     "process": "MainProcess",
+#     "thread": "MainThread"
+#   }
+# }
 
-In [6]: logger.emergency('Implemented RFC-5424 Syslog Severity Logs')                                         
-{
-  "version": "1.1",
-  "short_message": "Implemented RFC-5424 Syslog Severity Logs",
-  "full_message": "Implemented RFC-5424 Syslog Severity Logs",
-  "timestamp": 1593137657.236526,
-  "level": 0,
-  "line": 1,
-  "_file": "<ipython-input-6-5c45ca4c1de6>",
-  "_context": {
-    "module": "__main__:<module>:1",
-    "process": "MainProcess",
-    "thread": "MainThread"
-  }
-}
+logger.bind(new_field="i am additional filed gelf").error('iste natus error sit')
+# {
+#   "version": "1.1",
+#   "short_message": "iste natus error sit",
+#   "full_message": "iste natus error sit",
+#   "timestamp": 1593138435.430722,
+#   "level": 3,
+#   "line": 18,
+#   "_file": "/home/augustoliks/github/loguru-gelf-extension/tests/test_loguru_gelf_extension.py",
+#   "_context": {
+#     "module": "test_loguru_gelf_extension:test_loguru_calls:18",
+#     "process": "MainProcess",
+#     "thread": "MainThread"
+#   },
+#   "_new_field": "i am additional filed gelf"
+# }
 ```

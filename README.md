@@ -49,7 +49,7 @@ GELF log level is equal to the standard syslog levels.
 |  `info`              | Informational    | 6                | Informational messages
 |  `debug`, `trace`    | Debug            | 7                | Debug-level messages. Messages that contain information normally of use only when debugging a program.
 
-Example using IPython:
+Example:
 
 ```python
 from loguru import logger                                                                             

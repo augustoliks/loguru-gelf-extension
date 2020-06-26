@@ -15,3 +15,4 @@ class TestCallMethods(unittest.TestCase):
         logger.debug('test debug')
         logger.trace('test test tests')
         logger.emergency('emergency')
+        logger.bind(new_field="i am additional filed gelf").error('iste natus error sit')

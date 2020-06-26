@@ -42,15 +42,17 @@ def _gelf_sink(payload):
     record = event.get('record')
     text = event.get('text')
 
-    _short = record.get("extra").get(
-        "short_msg",
-        " ".join(record.get("message").split()[:10])
-    )
+    if record.get('level').get('name') == 'trace':
+        msg_short = " ".join(text.split(' ')[:10])
+        msg_full = text
+    else:
+        msg_short = " ".join(record.get('message').split(' ')[:10])
+        msg_full = record.get('message')
 
     gelf_payload = {
         'version': '1.1',
-        "short_message": _short,
-        "full_message": text,
+        "short_message": msg_short,
+        "full_message": msg_full,
         "timestamp": record.get("time").get('timestamp'),
         "level": record.get("level").get("no"),
         "line": record.get("line"),
@@ -79,30 +81,30 @@ def _gelf_sink(payload):
 
 def configure_gelf_output():
     logger.__class__.emergency = partialmethod(logger.__class__.log, "emergency")
-    logger.__class__.emerg = partialmethod(logger.__class__.log, "emerg")
     logger.__class__.alert = partialmethod(logger.__class__.log, "alert")
     logger.__class__.critical = partialmethod(logger.__class__.log, "critical")
-    logger.__class__.crit = partialmethod(logger.__class__.log, "crit")
     logger.__class__.error = partialmethod(logger.__class__.log, "error")
-    logger.__class__.err = partialmethod(logger.__class__.log, "err")
     logger.__class__.warning = partialmethod(logger.__class__.log, "warning")
     logger.__class__.notice = partialmethod(logger.__class__.log, "notice")
+    logger.__class__.success = partialmethod(logger.__class__.log, "success")
     logger.__class__.informational = partialmethod(logger.__class__.log, "informational")
     logger.__class__.info = partialmethod(logger.__class__.log, "info")
     logger.__class__.debug = partialmethod(logger.__class__.log, "debug")
-    # logger.level("emergency", no=0)
-    logger.level("emerg", no=0)
+    logger.__class__.trace = partialmethod(logger.__class__.log, "trace")
+
+    logger.level("emergency", no=0)
     logger.level("alert", no=1)
     logger.level("critical", no=2)
-    logger.level("crit", no=2)
     logger.level("error", no=3)
-    logger.level("err", no=3)
     logger.level("warning", no=4)
     logger.level("notice", no=5)
+    logger.level("success", no=5)
     logger.level("informational", no=6)
     logger.level("info", no=6)
     logger.level("debug", no=7)
-    filter_syslog_levels = _FilterSyslogLevels(os.getenv('LOG_LEVEL', 'debug'))
+    logger.level("trace", no=7)
+
+    filter_syslog_levels = _FilterSyslogLevels(os.getenv('GELFGURU_LEVEL', 'debug'))
     logger.configure(
         handlers=[
             dict(sink=_gelf_sink, filter=filter_syslog_levels, format='{level}', serialize=True, level=0)

@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "gelfguru"
-version = "0.1.1"
+version = "0.1.2"
 description = "Loguru extension for log in GELF payload format."
 authors = ["Carlos Neto <carlos.santos110@fatec.sp.gov.br>"]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = ""
-documentation = ""
+homepage = "https://github.com/augustoliks/loguru-gelf-extension/tree/develop"
+documentation = "https://github.com/augustoliks/loguru-gelf-extension/blob/develop/README.md"
 classifiers = [ 
     "Topic :: Internet :: Log Analysis",
     "Topic :: Software Development :: Libraries :: Python Modules"

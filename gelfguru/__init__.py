@@ -15,9 +15,11 @@ class _FilterSyslogLevels:
         'error': 3,
         'warning': 4,
         'notice': 5,
+        'success': 5,
         'informational': 6,
         'info': 6,
         'debug': 7,
+        'trace': 7,
     }
 
     def __init__(self, level):

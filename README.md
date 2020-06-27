@@ -30,7 +30,7 @@ from gelfguru import configure_gelf_output
 configure_gelf_output()
 
 logger.trace('loguru trace calls equals gelfguru debug calls')
-logger.info('Change numeric level value, in the case, is used RFC-5424 numeric level value')
+logger.info('Numeric level RFC-5424')
 logger.emergency('Implemented RFC-5424 Syslog Severity Logs')
 ```
 

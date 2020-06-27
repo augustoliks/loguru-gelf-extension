@@ -4,7 +4,7 @@ payload pattern, without modifying  built-in Loguru methods call.
 This library was created especially for applications running in
 Docker environment with GELF Logging Driver.
 """
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 
 from loguru import logger
@@ -50,7 +50,7 @@ def _gelf_sink(payload):
     record = event.get('record')
     text = event.get('text')
 
-    if record.get('level').get('name') == 'trace':
+    if record.get('level').get('no') <= 3 and record.get('exception'):
         msg_short = " ".join(text.split(' ')[:10])
         msg_full = text
     else:
@@ -87,7 +87,7 @@ def _gelf_sink(payload):
     print(json.dumps(gelf_payload))
 
 
-def configure_gelf_output():
+def configure_gelf_output() -> logger:
     logger.__class__.emergency = partialmethod(logger.__class__.log, "emergency")
     logger.__class__.alert = partialmethod(logger.__class__.log, "alert")
     logger.__class__.critical = partialmethod(logger.__class__.log, "critical")
@@ -118,3 +118,5 @@ def configure_gelf_output():
             dict(sink=_gelf_sink, filter=filter_syslog_levels, format='{level}', serialize=True, level=0)
         ]
     )
+
+    return logger
